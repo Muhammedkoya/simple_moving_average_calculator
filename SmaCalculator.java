@@ -81,19 +81,26 @@ public class SmaCalculator {
                                  List<Double> smaAdjClose, List<Double> smaVolume){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))){
             
-            bw.write(String.join(",", data.get(0)) + ",SMA(Open) 10D ,SMA(High) 10D ,SMA(Low) 10D ,SMA(Close) 10D ,SMA(Adj Close) 10D ,SMA(Volume) \n");
+            bw.write(String.join(",", data.get(0)) + ",SMA(Open) 10D,SMA(High) 10D,SMA(Low) 10D,SMA(Close) 10D,SMA(Adj Close) 10D,SMA(Volume)\n");
         
-            for(int i=1; i<data.size(); i++){
+
+            for (int i = 1; i < data.size(); i++) {
                 StringBuilder sb = new StringBuilder();
-                sb.append(String.join(",", data.get(i))).append(",");
-                sb.append(getSMAValue(smaOpen, i, false)).append(",");
-                sb.append(getSMAValue(smaHigh, i, false)).append(",");
-                sb.append(getSMAValue(smaLow, i, false)).append(",");
-                sb.append(getSMAValue(smaClose, i, false)).append(",");
-                sb.append(getSMAValue(smaAdjClose, i, false)).append(",");
-                sb.append(getSMAValue(smaVolume, i, true)).append("\n");
+                sb.append(String.join(",", data.get(i))); 
+            
+                
+                sb.append(",").append(getSMAValue(smaOpen, i, false));
+                sb.append(",").append(getSMAValue(smaHigh, i, false));
+                sb.append(",").append(getSMAValue(smaLow, i, false));
+                sb.append(",").append(getSMAValue(smaClose, i, false));
+                sb.append(",").append(getSMAValue(smaAdjClose, i, false));
+                sb.append(",").append(getSMAValue(smaVolume, i, true)); 
+            
+                sb.append("\n"); 
                 bw.write(sb.toString());
             }
+            
+
         }catch(IOException e){
             e.printStackTrace();
         }
