@@ -81,7 +81,7 @@ public class SmaCalculator {
                                  List<Double> smaAdjClose, List<Double> smaVolume){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(outputFile))){
             
-            bw.write(String.join(",", data.get(0)) + ",SMA(Open) 10D ,SMA(High) 10D ,SMA(Low) 10D ,SMA(Close) 10D ,SMA(Adj Close) 10D ,SMA(Volume) ,\n");
+            bw.write(String.join(",", data.get(0)) + ",SMA(Open) 10D ,SMA(High) 10D ,SMA(Low) 10D ,SMA(Close) 10D ,SMA(Adj Close) 10D ,SMA(Volume) \n");
         
             for(int i=1; i<data.size(); i++){
                 StringBuilder sb = new StringBuilder();
@@ -98,10 +98,6 @@ public class SmaCalculator {
             e.printStackTrace();
         }
     }
-
-    // private static String getSMAValue(List<Double> smaList, int index){
-    //     return Double.isNaN(smaList.get(index)) ? "" : String.format("%.3f", smaList.get(index));
-    // }
 
     private static String getSMAValue(List<Double> smaList, int index, boolean isVolume) {
         if (Double.isNaN(smaList.get(index))) {
