@@ -86,12 +86,12 @@ public class SmaCalculator {
             for(int i=1; i<data.size(); i++){
                 StringBuilder sb = new StringBuilder();
                 sb.append(String.join(",", data.get(i))).append(",");
-                sb.append(getSMAValue(smaOpen, i)).append(",");
-                sb.append(getSMAValue(smaHigh, i)).append(",");
-                sb.append(getSMAValue(smaLow, i)).append(",");
-                sb.append(getSMAValue(smaClose, i)).append(",");
-                sb.append(getSMAValue(smaAdjClose, i)).append(",");
-                sb.append(getSMAValue(smaVolume, i)).append("\n");
+                sb.append(getSMAValue(smaOpen, i, false)).append(",");
+                sb.append(getSMAValue(smaHigh, i, false)).append(",");
+                sb.append(getSMAValue(smaLow, i, false)).append(",");
+                sb.append(getSMAValue(smaClose, i, false)).append(",");
+                sb.append(getSMAValue(smaAdjClose, i, false)).append(",");
+                sb.append(getSMAValue(smaVolume, i, true)).append("\n");
                 bw.write(sb.toString());
             }
         }catch(IOException e){
@@ -99,7 +99,16 @@ public class SmaCalculator {
         }
     }
 
-    private static String getSMAValue(List<Double> smaList, int index){
-        return Double.isNaN(smaList.get(index)) ? "" : String.format("%.3f", smaList.get(index));
+    // private static String getSMAValue(List<Double> smaList, int index){
+    //     return Double.isNaN(smaList.get(index)) ? "" : String.format("%.3f", smaList.get(index));
+    // }
+
+    private static String getSMAValue(List<Double> smaList, int index, boolean isVolume) {
+        if (Double.isNaN(smaList.get(index))) {
+            return "";
+        }
+        return isVolume ? String.format("%.0f", smaList.get(index)) : String.format("%.3f", smaList.get(index));
     }
+    
+
 } 
